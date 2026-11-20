@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block content %}
+    <div>
+        <p>{{ welcome_message }}</p>
+    </div>        
+    <div>
+    {% if session.get("user") %}
+        <p>This month you have spent {{ this_month_expenses | vnd }} and earned {{ this_month_earnings | vnd }}.</p>
+    {% endif %}
+    </div>
+{% endblock %}  

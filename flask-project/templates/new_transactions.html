@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block content %}
+    <form action="/new" method="post">
+        <select name="transaction">
+            <option value="earning">Earning</option>
+            <option value="expense">Expense</option>
+        </select>
+        <input type="number" step="0.01" placeholder="Amount" name="amount">
+        <input type="text" placeholder="Details" name="details">
+        <input type="date" name="time">
+        <button type="submit">Confirm</button>
+        <div>
+            <p>{{ message }}</p>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+{% block content %}
+    <form action="/history" method="post">
+        <label>Transaction type:</label>
+        <select name="transaction">
+            <option value="all">All</option>
+            <option value="earning">Earning</option>
+            <option value="expense">Expense</option>            
+        </select>
+        <label>Keywords:</label>
+        <input type="text" name="keywords">
+        <label>From:</label>
+        <input type="date" name="start">
+        <label>To:</label>
+        <input type="date" name="end">
+        <label>Sort by:</label>
+        <select name="sort">
+            <option value="oldest">Oldest</option>
+            <option value="newest">Newest</option>
+            <option value="largest">Largest</option>
+            <option value="smallest">Smallest</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <div>
+        <table class="table">
+            <tr>
+                <th scope="col">Transaction type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Time</th>
+            </tr>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] | vnd }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        {% if total_expenses is defined and total_earnings is defined %}
+        <p>From {{ start }} to {{ end }}, you spent {{ total_expenses | vnd }} and earned {{ total_earnings | vnd }}.</p>
+        {% endif %}
+    </div>
+{% endblock %}
